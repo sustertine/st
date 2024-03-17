@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poslovne funkcionalnosti Backend Strežnika - Zobozdravstvena Klinika</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Funkcionalnosti Strežnika</h1>
+<img src="../resources/usecase.png" alt="Primeri uproabe" style="display: block; margin: 0 auto; width: 600px; height: auto;">
+<ul>
+    <li>
+        <h2>1.) Naročanje stranke na termin</h2>
+        <p>
+            Klinika lahko v interni koledar vnese obisk stranke. V primeru da je termin že zaseden, se obisk ne sme
+            shraniti.
+            Če je je termin prost, se obisk shrani v podatkovno bazo.
+        </p>
+        <b>Vhodi:</b>
+        <ul>
+            <li>- Ime in priimek stranke</li>
+            <li>- Telefonska številka stranke</li>
+            <li>- Željeni datum obiska</li>
+            <li>- Željena ura obiska</li>
+        </ul>
+        <b>Izhodi:</b>
+        <ul>
+            <li>- Uspešno naročanje (shranjeno v podatkovno bazo)</li>
+            <li>- Neuspešno naročanje (prekinjena transakcija)</li>
+        </ul>
+        <hr/>
+    </li>
+    <li>
+        <h2>2.) Pregled vseh terminov v internem koledarju</h2>
+        <p>
+            Klinika lahko pregleda vse termine, ki so trenutno zasedeni in proste.
+        </p>
+        <b>Vhodi:</b>
+        <ul>
+            <li>- Datum pregleda (opcijsko) </li>
+        </ul>
+        <b>Izhodi:</b>
+        <ul>
+            <li>- Seznam vseh terminov</li>
+        </ul>
+        <hr/>
+    </li>
+    <li>
+        <h2>3.) Sprememba termina</h2>
+        <p>
+            Klinika lahko spremeni termin obiska stranke. V primeru, da je termin že zaseden, se sprememba ne sme
+            shraniti.
+            Če je je termin prost, se sprememba shrani v podatkovno bazo.
+        </p>
+        <b>Vhodi:</b>
+        <ul>
+            <li>- ID termina</li>
+            <li>- Novi datum obiska</li>
+            <li>- Nova ura obiska</li>
+        </ul>
+        <b>Izhodi:</b>
+        <ul>
+            <li>- Uspešna sprememba termina (shranjeno v podatkovno bazo)</li>
+            <li>- Neuspešna sprememba termina (prekinjena transakcija)</li>
+        </ul>
+        <hr/>
+    </li>
+    <li>
+        <h2>4.) Izbris termina</h2>
+        <p>
+            Klinika lahko izbriše termin obiska stranke.
+        </p>
+        <b>Vhodi:</b>
+        <ul>
+            <li>- ID termina</li>
+        </ul>
+        <b>Izhodi:</b>
+        <ul>
+            <li>- Uspešen izbris termina (shranjeno v podatkovno bazo)</li>
+            <li>- Neuspešen izbris termina (prekinjena transakcija)</li>
+        </ul>
+        <hr/>
+    </li>
+    <li>
+        <h2>5.) Obveščanje stranke</h2>
+        <p>
+            Klinika lahko pošlje obvestilo stranki o terminu obiska.
+        </p>
+        <b>Vhodi:</b>
+        <ul>
+            <li>- ID termina</li>
+            <li>- Email stranke</li>
+        </ul>
+        <b>Izhodi:</b>
+        <ul>
+            <li>- Uspešno obveščanje (pošiljanje email obvestila)</li>
+        </ul>
+        <hr/>
+    </li>
+</ul>
+</body>
+</html>

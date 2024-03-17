@@ -1,0 +1,21 @@
+Specifikacije Aplikacije za Interno Naročanje Pacientov v Zobozdravstveni Kliniki
+
+1. Podatkovna Baza:
+   - Uporabljena podatkovna baza: MongoDB
+   - Opis:
+     - MongoDB je dokumentna, NoSQL podatkovna baza, ki temelji na shranjevanju podatkov v obliki dokumentov v formatu BSON (Binary JSON).
+     - Podatki so shranjeni v zbirkah (collections), kjer vsak dokument predstavlja en zapis.
+     - MongoDB omogoča fleksibilno shranjevanje podatkov, saj dokumenti v isti zbirki lahko imajo različne strukture.
+     - Podpira obsežne možnosti poizvedb, vključno z iskanjem, filtriranjem, agregacijo in urejanjem podatkov.
+     - Zaradi svoje skalabilnosti, visoke zmogljivosti in prilagodljivosti je MongoDB priljubljena izbira za sodobne aplikacije.
+
+2. Backend:
+   - Ogrodje: NestJS
+   - Funkcionalnosti:
+     - API za upravljanje s pacienti, zobozdravniki, termini in uporabniki
+     - Avtentikacija uporabnikov (JWT avtentikacija)
+     - Validacija vhodnih podatkov
+     - Obvladovanje izjem in napak
+     - Integracija s podatkovno bazo MongoDB preko Mongoose ORM
+     - Avtorizacija dostopa do določenih funkcionalnosti na podlagi vlog uporabnikov
+     - Integracija s storitvami za pošiljanje obvestil (npr. e-pošta, SMS) za obveščanje strank o terminih
