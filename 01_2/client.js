@@ -7,7 +7,7 @@ const client = axios.create({
 
 async function testRegister(username, password) {
     try {
-        const response = await client.post('/register', { username, password });
+        const response = await client.post('/register', {username, password});
         console.log(response.data);
     } catch (error) {
         console.error(error.response.data);
@@ -16,7 +16,7 @@ async function testRegister(username, password) {
 
 async function testLogin(username, password) {
     try {
-        const response = await client.post('/login', { username, password });
+        const response = await client.post('/login', {username, password});
         console.log(response.data);
     } catch (error) {
         console.error(error.response.data);
@@ -25,7 +25,7 @@ async function testLogin(username, password) {
 
 async function testProtected(username, password) {
     try {
-        const response = await client.get('/protected', { headers: { username, password } });
+        const response = await client.get('/protected', {headers: {username, password}});
         console.log(response.data);
     } catch (error) {
         console.error(error.response.data);
