@@ -1,4 +1,5 @@
 const axios = require('axios');
+const qs = require('qs');
 
 const client = axios.create({
     baseURL: 'http://localhost:3000',
@@ -7,66 +8,47 @@ const client = axios.create({
 
 let token;
 
-async function testRegister(username, password) {
-    try {
-        const response = await client.post('/auth/register', {username, password});
-        console.log(response.data);
-    } catch (error) {
-        console.error(error.response.data);
-    }
+async function register(username, password) {
+    const response = await client.post('/auth/register', {username, password});
+    console.log(response.data);
 }
 
-async function testLogin(username, password) {
-    try {
-        const response = await client.post('/auth/login', {username, password});
-        console.log(response.data);
-        token = response.data.token;
-    } catch (error) {
-        console.error(error.response.data);
-    }
+async function login(username, password) {
+    const authData = {
+        grant_type: 'password',
+        username,
+        password,
+        client_id: 'client_id', // replace with your actual client_id
+        client_secret: 'client_secret', // replace with your actual client_secret
+        scope: 'all',
+    };
+    const response = await client.post('/auth', qs.stringify(authData), {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    });
+    token = response.data.access_token;
 }
 
-async function testGetAllUsers() {
-    try {
-        const response = await client.get('/api/users', { headers: { Authorization: `Bearer ${token}` } });
-        console.log(response.data);
-    } catch (error) {
-        console.error(error.response.data);
-    }
+async function getUser(username) {
+    const response = await client.get(`/api/users/${username}`, {
+        headers: {Authorization: `Bearer ${token}`},
+    });
+    console.log(response.data);
 }
 
-async function testGetUserByUsername(username) {
-    try {
-        const response = await client.get(`/api/users/${username}`, { headers: { Authorization: `Bearer ${token}` } });
-        console.log(response.data);
-    } catch (error) {
-        console.error(error.response.data);
-    }
+async function getAllUsers() {
+    const response = await client.get('/api/users', {
+        headers: {Authorization: `Bearer ${token}`},
+    });
+    console.log(response.data);
 }
 
-async function testUpdateUserByUsername(username, updateData) {
-    try {
-        const response = await client.put(`/api/users/${username}`, updateData, { headers: { Authorization: `Bearer ${token}` } });
-        console.log(response.data);
-    } catch (error) {
-        console.error(error.response.data);
-    }
+async function testOAuthFlow() {
+    await register('testuser', 'testpassword');
+    // await login('testuser', 'testpassword');
+    await getUser('testuser');
+    await getAllUsers();
 }
 
-async function testInvalidToken() {
-    try {
-        const response = await client.get('/api/users', { headers: { Authorization: `Bearer invalid_token` } });
-        console.log(response.data);
-    } catch (error) {
-        console.error(error.response.data);
-    }
-}
-
-testRegister('testuser', 'testpassword')
-    .then(() => testLogin('testuser', 'testpassword'))
-    .then(() => testGetAllUsers())
-    .then(() => testGetUserByUsername('testuser'))
-    .then(() => testUpdateUserByUsername('testuser', { password: 'newpassword' }))
-    .then(() => testLogin('testuser', 'newpassword'))
-    .then(() => testGetUserByUsername('testuser'))
-    .then(() => testInvalidToken());
+testOAuthFlow().catch(console.error);
